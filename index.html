@@ -59,11 +59,20 @@ nav{
 }
 .hero-title{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(72px,10vw,140px);
+  /* font-size:clamp(72px,10vw,140px); */
   line-height:0.9;letter-spacing:2px;margin-top:24px;
 }
-.hero-title .line1{display:block;animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;}
+.hero-title .line1{
+  display:block;animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;
+  font-size:clamp(72px,10vw,140px);
+}
 .hero-title .line2{
+  display:block;-webkit-text-stroke:2.5px var(--black);color:transparent;
+  animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.38s both;
+  font-size:clamp(72px,10vw,140px);
+}
+.hero-title .line0{
+  font-size: 6rem;
   display:block;-webkit-text-stroke:2.5px var(--black);color:transparent;
   animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.38s both;
 }
@@ -363,6 +372,7 @@ footer span{
   <div class="hero-left">
     <p class="hero-eyebrow">Monroe FTC Robotics · Monroe Township, NJ</p>
     <h1 class="hero-title">
+      <span class="line0">TEAM</span>
       <span class="line1">ANTI</span>
       <span class="line2">GRAVITY</span>
     </h1>
