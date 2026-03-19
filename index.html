@@ -1,938 +1,718 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Cyber Titans | Monroe FTC Robotics</title>
-  <meta
-    name="description"
-    content="Cyber Titans is a Monroe-based FIRST Tech Challenge robotics team welcoming motivated students from Monroe and neighboring towns."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#060816;
-      --bg2:#0b1230;
-      --panel:rgba(12,18,45,.72);
-      --panel-border:rgba(108,150,255,.24);
-      --text:#eef3ff;
-      --muted:#b8c4ea;
-      --cyan:#3ee7ff;
-      --blue:#6d8dff;
-      --violet:#9b6bff;
-      --glow:0 0 30px rgba(62,231,255,.28), 0 0 60px rgba(109,141,255,.18);
-      --shadow:0 20px 60px rgba(0,0,0,.45);
-      --radius:22px;
-      --max:1200px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 20% 20%, rgba(62,231,255,.10), transparent 30%),
-        radial-gradient(circle at 80% 15%, rgba(155,107,255,.16), transparent 25%),
-        radial-gradient(circle at 50% 80%, rgba(109,141,255,.10), transparent 30%),
-        linear-gradient(180deg, #040611 0%, #09112a 45%, #050816 100%);
-      font-family:Inter, system-ui, sans-serif;
-      overflow-x:hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size:44px 44px;
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,.5), transparent 85%);
-      opacity:.20;
-    }
-
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-
-    .wrap{
-      width:min(calc(100% - 32px), var(--max));
-      margin:0 auto;
-    }
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(12px);
-      background:rgba(5,8,22,.55);
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-
-    .topbar-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      min-height:72px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .brand-mark{
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      position:relative;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(62,231,255,.9), rgba(62,231,255,.18) 35%, transparent 36%),
-        linear-gradient(135deg, rgba(62,231,255,.25), rgba(109,141,255,.22) 50%, rgba(155,107,255,.28));
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:var(--glow);
-      overflow:hidden;
-    }
-
-    .brand-mark::before,
-    .brand-mark::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(90deg, transparent 0 18%, rgba(255,255,255,.25) 18% 20%, transparent 20% 38%, rgba(255,255,255,.18) 38% 40%, transparent 40% 100%);
-      transform:skewX(-25deg) translateX(-8px);
-      opacity:.45;
-    }
-
-    .brand-mark::after{
-      background:
-        linear-gradient(180deg, transparent 0 22%, rgba(255,255,255,.18) 22% 24%, transparent 24% 62%, rgba(255,255,255,.14) 62% 64%, transparent 64% 100%);
-      transform:none;
-      opacity:.32;
-    }
-
-    .brand-text{
-      min-width:0;
-    }
-
-    .brand-title{
-      margin:0;
-      font:800 1rem/1 Orbitron, sans-serif;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      white-space:nowrap;
-    }
-
-    .brand-sub{
-      margin-top:5px;
-      color:var(--muted);
-      font-size:.86rem;
-      white-space:nowrap;
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:18px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .nav a{
-      color:#dce7ff;
-      font-weight:600;
-      font-size:.96rem;
-      opacity:.92;
-    }
-
-    .nav a:hover{color:var(--cyan)}
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-height:48px;
-      padding:0 20px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(135deg, rgba(62,231,255,.18), rgba(109,141,255,.18));
-      color:white;
-      font-weight:700;
-      box-shadow:var(--shadow);
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-      border-color:rgba(62,231,255,.45);
-      box-shadow:0 18px 48px rgba(0,0,0,.42), 0 0 28px rgba(62,231,255,.18);
-    }
-
-    .btn.primary{
-      background:linear-gradient(135deg, rgba(62,231,255,.28), rgba(109,141,255,.30), rgba(155,107,255,.24));
-      border-color:rgba(62,231,255,.38);
-    }
-
-    .hero{
-      position:relative;
-      padding:72px 0 36px;
-      overflow:hidden;
-    }
-
-    .hero-inner{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:34px;
-      align-items:center;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
-      color:#d6e6ff;
-      font-weight:700;
-      font-size:.9rem;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-
-    .eyebrow-dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:var(--cyan);
-      box-shadow:0 0 18px rgba(62,231,255,.9);
-    }
-
-    .hero h1{
-      margin:18px 0 14px;
-      font-family:Orbitron, sans-serif;
-      font-size:clamp(2.5rem, 6vw, 5.7rem);
-      line-height:.93;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      text-shadow:0 0 28px rgba(62,231,255,.16);
-    }
-
-    .hero .gradient{
-      background:linear-gradient(135deg, #f8fbff 0%, #bfe8ff 22%, #62e9ff 52%, #8f8dff 76%, #d3b0ff 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero p{
-      margin:0;
-      max-width:700px;
-      color:var(--muted);
-      font-size:1.08rem;
-      line-height:1.72;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:28px;
-    }
-
-    .hero-note{
-      margin-top:20px;
-      color:#d9e4ff;
-      font-weight:600;
-      font-size:.98rem;
-    }
-
-    .hero-note strong{color:white}
-
-    .hero-art{
-      position:relative;
-      min-height:560px;
-      border-radius:30px;
-      border:1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(circle at 30% 20%, rgba(62,231,255,.20), transparent 24%),
-        radial-gradient(circle at 72% 22%, rgba(155,107,255,.16), transparent 22%),
-        radial-gradient(circle at 55% 65%, rgba(109,141,255,.14), transparent 25%),
-        linear-gradient(180deg, rgba(7,12,32,.88), rgba(8,11,26,.92));
-      box-shadow:var(--shadow), var(--glow);
-      overflow:hidden;
-      isolation:isolate;
-    }
-
-    .hero-art::before{
-      content:"";
-      position:absolute;
-      inset:-20% -10%;
-      background:
-        conic-gradient(from 90deg, transparent 0 35%, rgba(62,231,255,.18) 36% 44%, transparent 45% 100%);
-      filter:blur(18px);
-      animation:spin 18s linear infinite;
-      opacity:.65;
-    }
-
-    .hero-art::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent),
-        linear-gradient(180deg, transparent, rgba(62,231,255,.06), transparent);
-      mix-blend-mode:screen;
-      opacity:.45;
-      pointer-events:none;
-    }
-
-    @keyframes spin{
-      to{transform:rotate(360deg)}
-    }
-
-    .robot{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      z-index:2;
-    }
-
-    .robot svg{
-      width:min(100%, 520px);
-      height:auto;
-      filter:drop-shadow(0 0 20px rgba(62,231,255,.25));
-    }
-
-    .chip{
-      position:absolute;
-      padding:10px 14px;
-      border-radius:14px;
-      background:rgba(10,16,40,.82);
-      border:1px solid rgba(255,255,255,.10);
-      color:#e9f3ff;
-      font-weight:700;
-      font-size:.9rem;
-      box-shadow:var(--shadow);
-      z-index:3;
-      backdrop-filter:blur(10px);
-    }
-
-    .chip small{
-      display:block;
-      color:var(--muted);
-      font-weight:600;
-      margin-top:4px;
-      font-size:.78rem;
-    }
-
-    .chip.c1{top:26px; left:26px}
-    .chip.c2{top:24px; right:22px}
-    .chip.c3{bottom:24px; left:26px}
-    .chip.c4{bottom:32px; right:24px}
-
-    .section{
-      padding:34px 0;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:22px;
-    }
-
-    .section-title{
-      margin:0;
-      font-family:Orbitron, sans-serif;
-      font-size:clamp(1.5rem, 3vw, 2.4rem);
-      letter-spacing:.05em;
-      text-transform:uppercase;
-    }
-
-    .section-copy{
-      margin:0;
-      max-width:720px;
-      color:var(--muted);
-      line-height:1.72;
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:20px;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:20px;
-    }
-
-    .card{
-      position:relative;
-      background:var(--panel);
-      border:1px solid var(--panel-border);
-      border-radius:var(--radius);
-      padding:24px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      backdrop-filter:blur(10px);
-    }
-
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(135deg, rgba(62,231,255,.10), transparent 32%, transparent 68%, rgba(109,141,255,.08));
-      pointer-events:none;
-    }
-
-    .card-icon{
-      width:56px;
-      height:56px;
-      border-radius:16px;
-      display:grid;
-      place-items:center;
-      margin-bottom:16px;
-      background:linear-gradient(135deg, rgba(62,231,255,.18), rgba(109,141,255,.20), rgba(155,107,255,.18));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:var(--glow);
-      font-size:1.4rem;
-      font-weight:800;
-      font-family:Orbitron, sans-serif;
-    }
-
-    .card h3{
-      margin:0 0 10px;
-      font-size:1.18rem;
-    }
-
-    .card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.68;
-    }
-
-    .feature-list{
-      list-style:none;
-      padding:0;
-      margin:16px 0 0;
-    }
-
-    .feature-list li{
-      position:relative;
-      padding-left:18px;
-      margin:10px 0;
-      color:#dbe6ff;
-    }
-
-    .feature-list li::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:.62em;
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--cyan);
-      box-shadow:0 0 12px rgba(62,231,255,.7);
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:18px;
-      margin-top:10px;
-    }
-
-    .stat{
-      padding:22px 18px;
-      border-radius:20px;
-      background:rgba(255,255,255,.045);
-      border:1px solid rgba(255,255,255,.09);
-      text-align:center;
-    }
-
-    .stat strong{
-      display:block;
-      font-family:Orbitron, sans-serif;
-      font-size:1.8rem;
-      line-height:1;
-      color:white;
-      margin-bottom:8px;
-    }
-
-    .stat span{
-      color:var(--muted);
-      font-weight:600;
-      font-size:.95rem;
-      line-height:1.45;
-    }
-
-    .join-panel{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:22px;
-      align-items:stretch;
-    }
-
-    .contact-box{
-      display:grid;
-      gap:14px;
-    }
-
-    .contact-row{
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-      padding:16px 18px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .contact-row b{
-      display:block;
-      margin-bottom:4px;
-    }
-
-    .contact-row div{
-      color:var(--muted);
-      line-height:1.6;
-    }
-
-    .footer{
-      padding:26px 0 40px;
-      color:#aebce5;
-      text-align:center;
-      font-size:.95rem;
-    }
-
-    .footer strong{
-      color:white;
-      font-family:Orbitron, sans-serif;
-      letter-spacing:.05em;
-    }
-
-    .muted-link{
-      color:#dce7ff;
-      text-decoration:underline;
-      text-decoration-color:rgba(62,231,255,.4);
-      text-underline-offset:3px;
-    }
-
-    @media (max-width: 1024px){
-      .hero-inner,
-      .join-panel,
-      .grid-3,
-      .grid-2{
-        grid-template-columns:1fr;
-      }
-
-      .stats{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-
-      .hero-art{
-        min-height:480px;
-      }
-    }
-
-    @media (max-width: 720px){
-      .topbar-inner{
-        flex-direction:column;
-        align-items:flex-start;
-        padding:12px 0;
-      }
-
-      .nav{
-        width:100%;
-        justify-content:flex-start;
-        gap:14px;
-      }
-
-      .hero{
-        padding-top:38px;
-      }
-
-      .hero-art{
-        min-height:400px;
-      }
-
-      .chip{
-        font-size:.8rem;
-        padding:8px 10px;
-      }
-
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      .section{
-        padding:26px 0;
-      }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Antigravity Robotics</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/x-icon" href="WebIcon.png">
+<style>
+:root {
+  --black: #303030;
+  --white: #e2e2e2;
+  --rule: rgba(0,0,0,1.0);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--white);color:var(--black);
+  font-family:'Lato',sans-serif;overflow-x:hidden;
+  font-size:22px;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 56px;
+  background:#e2e2e2;
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--rule);
+}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--black);}
+.nav-wordmark{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:5px;}
+.nav-logo-sub{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:2px;opacity:0.55;text-transform:uppercase;padding-left:2px;}
+.nav-links{display:flex;gap:40px;}
+.nav-links a{
+  font-family:'Space Mono',monospace;font-size:1rem;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--rule);text-decoration:none;opacity:0.72;transition:opacity 0.25s;
+}
+.nav-links a:hover{opacity:1;}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;padding:130px 56px 80px;gap:40px;overflow:hidden;
+  position:relative;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='92'%3E%3Cpolygon points='40,4 76,24 76,68 40,88 4,68 4,24' fill='none' stroke='%230c0c0c' stroke-width='0.6' opacity='0.04'/%3E%3C/svg%3E");
+  background-size:80px 92px;pointer-events:none;z-index:0;
+}
+.hero-left{z-index:2;}
+.hero-eyebrow{
+  font-family:'Space Mono',monospace;font-size:0.75rem;
+  letter-spacing:4px;text-transform:uppercase;color:rgba(0,0,0,0.75);
+  animation:slideLeft 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,10vw,140px);
+  line-height:0.9;letter-spacing:2px;margin-top:24px;
+}
+.hero-title .line1{display:block;animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;}
+.hero-title .line2{
+  display:block;-webkit-text-stroke:2.5px var(--black);color:transparent;
+  animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.38s both;
+}
+.hero-sub{
+  margin-top:28px;font-size:1.2rem;line-height:1.85;font-weight:600;
+  max-width:440px;color:rgba(0,0,0,0.85);
+  animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.52s both;
+}
+.hero-cta-row{
+  margin-top:36px;display:flex;gap:20px;align-items:center;
+  animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.65s both;
+}
+.cta-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;font-size:0.78rem;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--white);background:var(--black);
+  padding:16px 32px;text-decoration:none;
+  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  transition:opacity 0.3s;
+}
+.cta-primary:hover{opacity:0.75;}
+.hero-right{
+  display:flex;justify-content:center;align-items:center;z-index:1;
+  animation:slideRight 0.95s cubic-bezier(0.16,1,0.3,1) 0.35s both;
+}
+
+/* ─── RULE ROW ─── */
+.rule-row{
+  display:flex;align-items:center;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);overflow:hidden;
+}
+.rule-item{
+  font-family:'Space Mono',monospace;font-size:0.7rem;
+  letter-spacing:4px;text-transform:uppercase;
+  opacity:1.0;padding:18px 28px;border-right:1px solid var(--rule);white-space:nowrap;
+}
+.rule-item:last-child{border-right:none;}
+
+/* ─── STATS ─── */
+.stats-bar{
+  background:var(--black);color:var(--white);
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.stat{padding:52px 32px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);}
+.stat:last-child{border-right:none;}
+.stat-num{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,5vw,5rem);
+  letter-spacing:-1px;line-height:1;display:block;color:var(--white);
+}
+.stat-label{
+  font-family:'Space Mono',monospace;font-size:0.9rem;
+  letter-spacing:3px;text-transform:uppercase;opacity:0.65;
+  margin-top:10px;display:block;
+}
+
+/* ─── SECTION BASE ─── */
+.section{padding:96px 56px;border-bottom:1px solid var(--rule);}
+.section-label{
+  font-family:'Space Mono',monospace;font-size:0.7rem;
+  letter-spacing:4px;text-transform:uppercase;opacity:0.6;
+  margin-bottom:42px;display:flex;align-items:center;gap:14px;
+}
+.section-label::after{content:'';width:38px;height:1px;background:currentColor;opacity:0.5;}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(44px,6vw,78px);
+  line-height:0.92;letter-spacing:1px;margin-bottom:52px;
+}
+
+/* ─── PILLARS ─── */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pillar{
+  background:var(--black);color:var(--white);
+  padding:52px 36px 44px;
+  position:relative;overflow:hidden;
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1), filter 0.3s;
+  cursor:default;min-height:380px;
+  display:flex;flex-direction:column;
+}
+.pillar:hover{transform:translateY(-8px) scale(1.02);filter:brightness(1.12);}
+.pillar-hex-wrap{display:block;margin-bottom:22px;}
+.pillar-num{
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  letter-spacing:3px;opacity:0.6;margin-bottom:14px;
+}
+.pillar-title{
+  font-family:'Bebas Neue',sans-serif;font-size:2rem;
+  letter-spacing:2px;margin-bottom:16px;color:var(--white);
+}
+.pillar-body{font-size:1.2rem;line-height:1.85;opacity:1.0;font-weight:600;}
+.pillar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:rgba(255,255,255,0.15);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.pillar:hover::after{transform:scaleX(1);}
+
+/* ─── TEAM ─── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.team-card{
+  border:1px solid var(--rule);padding:44px 32px;
+  background-color: var(--black);
+  position:relative;overflow:hidden;
+  transition:border-color 0.35s,transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.team-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:var(--black);transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);z-index:0;
+}
+.tc-division,.tc-name,.tc-desc,
+.tc-tag{color:var(--white);border-color:rgba(255,255,255,0.2);opacity:1 !important;}
+.tc-hex{margin-bottom:24px;display:block;transition:transform 0.4s;}
+.tc-division{
+  font-family:'Space Mono',monospace;font-size:0.68rem;
+  letter-spacing:3px;opacity:0.6;margin-bottom:14px;transition:color 0.45s,opacity 0.45s;
+}
+.tc-name{
+  font-family:'Bebas Neue',sans-serif;font-size:2.4rem;
+  letter-spacing:2px;margin-bottom:18px;line-height:1;transition:color 0.45s;
+}
+.tc-desc{font-size:1.2rem;line-height:1.8;opacity:0.75;font-weight:600;transition:color 0.45s,opacity 0.45s;}
+.tc-tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;}
+.tc-tag{
+  font-family:'Space Mono',monospace;font-size:0.9rem;
+  letter-spacing:2px;text-transform:uppercase;
+  border:1px solid var(--white);padding:6px 14px;opacity:0.7;
+  transition:color 0.45s,border-color 0.45s,opacity 0.45s;
+}
+
+/* ─── PROJECTS / GOALS ─── */
+.proj-row{
+  display:flex;align-items:center;gap:32px;
+  padding:30px 0;border-bottom:1px solid var(--rule);
+  transition:padding-left 0.35s cubic-bezier(0.16,1,0.3,1),background 0.3s;
+}
+.proj-row:first-child{border-top:1px solid var(--rule);}
+.proj-row{padding-left:14px;background:var(--black);}
+.proj-name,
+.proj-arrow{color:var(--white);opacity:1 !important;}
+.proj-hexmark polygon{fill:var(--white);stroke:var(--white);}
+.proj-hexmark{flex-shrink:0;transition:transform 0.3s;}
+.proj-hexmark{transform:scale(1.2);}
+.proj-name{
+  font-family:'Lato',sans-serif;font-size:1.75rem;
+  letter-spacing:1px;flex:1;line-height:1;transition:color 0.3s;
+}
+.proj-arrow{
+  opacity:0.45;font-size:1.1rem;flex-shrink:0;
+  transition:color 0.3s,opacity 0.3s,transform 0.3s;
+}
+
+/* ─── GRADE BREAKDOWN ─── */
+.grade-breakdown{
+  border-bottom:1px solid var(--rule);
+  padding:24px 0 32px 52px;
+  background:var(--black);
+  border-left:2px solid var(--black);
+}
+.grade-breakdown-label{
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--white);opacity:1.0;
+  margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.grade-breakdown-label::before{
+  content:'';display:inline-block;width:7px;height:7px;
+  background:var(--white);opacity:0.4;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.grade-chips{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;}
+.grade-chip{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  border:1px solid rgba(0,0,0,0.25);
+  padding:16px 24px;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
+  cursor:default;background:var(--white);
+}
+.grade-chip::before{
+  content:'';position:absolute;inset:0;
+  background:var(--black);transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);z-index:0;
+}
+.gc-grade,.gc-spots{position:relative;z-index:1;transition:color 0.3s;}
+.gc-grade{
+  font-family:'Bebas Neue',sans-serif;font-size:1.35rem;
+  letter-spacing:2px;color:var(--black);line-height:1;
+}
+.gc-spots{
+  font-family:'Space Mono',monospace;font-size:0.75rem;
+  letter-spacing:2px;text-transform:uppercase;font-weight:400;
+  color:var(--black);opacity:1.0;
+}
+.grade-note{
+  font-size:1.2rem;line-height:1.8;
+  color:var(--white);opacity:1.0;
+  font-weight:400;max-width:560px;
+}
+.grade-note strong{font-weight:400;opacity:1;color:var(--white);}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:52px;align-items:end;}
+.contact-email-link{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.5rem;letter-spacing:2px;
+  color:var(--white);text-decoration:none;display:inline-block;
+  border-bottom:1px solid rgba(255,255,255,0.35);
+  padding-bottom:6px;transition:border-color 0.3s;
+}
+.contact-email-header{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.5rem;letter-spacing:2px;
+  color:var(--white);text-decoration:none;display:inline-block;
+  border-bottom:0px solid rgba(255,255,255,0.35);
+  padding-bottom:6px;transition:border-color 0.3s;
+}
+.contact-email-link:hover{border-color:rgba(255,255,255,0.75);}
+.contact-note{
+  margin-top:20px;font-size:1.2rem;
+  opacity:1.0;font-weight:400;line-height:1.85;color:var(--white);
+  white-space:nowrap;
+}
+.social-list{display:flex;flex-direction:column;gap:14px;align-items:flex-end;}
+.soc-link{
+  font-family:'Space Mono',monospace;font-size:0.72rem;
+  letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.25s;
+}
+.soc-link:hover{color:rgba(255,255,255,1);}
+#join .section-label{color:rgba(255,255,255,0.6) !important;opacity:1;}
+#join .section-title{color:var(--white);}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--black);padding:22px 56px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;justify-content:space-between;align-items:center;
+}
+footer span{
+  font-family:'Space Mono',monospace;font-size:0.62rem;
+  letter-spacing:2px;color:rgba(255,255,255,0.55);
+}
+
+/* ═══════════════════════════════════════
+   SCROLL-TRIGGERED ANIMATION CLASSES
+═══════════════════════════════════════ */
+.anim-left{opacity:0;transform:translateX(-48px) rotate(-2.5deg);transition:opacity 0.72s ease,transform 0.72s cubic-bezier(0.16,1,0.3,1);}
+.anim-right{opacity:0;transform:translateX(48px) rotate(2.5deg);transition:opacity 0.72s ease,transform 0.72s cubic-bezier(0.16,1,0.3,1);}
+.anim-up{opacity:0;transform:translateY(46px) rotate(1deg);transition:opacity 0.72s ease,transform 0.72s cubic-bezier(0.16,1,0.3,1);}
+.anim-pop{opacity:0;transform:translateY(36px) scale(0.93);transition:opacity 0.68s ease,transform 0.68s cubic-bezier(0.16,1,0.3,1);}
+.anim-left.in,.anim-right.in,.anim-up.in,.anim-pop.in{opacity:1;transform:none;}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.17s;}.d3{transition-delay:0.26s;}
+.d4{transition-delay:0.35s;}.d5{transition-delay:0.44s;}
+
+@keyframes slideLeft{from{opacity:0;transform:translateX(-52px) rotate(-3deg);}to{opacity:1;transform:none;}}
+@keyframes slideRight{from{opacity:0;transform:translateX(52px) rotate(3deg);}to{opacity:1;transform:none;}}
+
+#hex-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+
+@media(max-width:900px){
+  nav{padding:16px 22px;}
+  #hero{grid-template-columns:1fr;padding:110px 22px 60px;}
+  .hero-right{display:none;}
+  .section{padding:68px 22px;}
+  .pillars,.team-grid{grid-template-columns:1fr;}
+  .stats-bar{grid-template-columns:1fr 1fr;}
+  .contact-grid{grid-template-columns:1fr;gap:36px;}
+  .social-list{align-items:flex-start;}
+  footer{flex-direction:column;gap:6px;text-align:center;}
+  .grade-breakdown{padding-left:22px;}
+  .grade-chips{gap:8px;}
+  .contact-note{white-space:normal;}
+}
+</style>
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="wrap topbar-inner">
-      <a class="brand" href="#top" aria-label="Cyber Titans home">
-        <div class="brand-mark"></div>
-        <div class="brand-text">
-          <div class="brand-title">Cyber Titans</div>
-          <div class="brand-sub">Monroe FTC Robotics</div>
-        </div>
-      </a>
+<canvas id="hex-canvas"></canvas>
 
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#experience">What Students Do</a>
-        <a href="#join">Join</a>
-        <a class="btn primary" href="https://www.paypal.com/donate/?hosted_button_id=PNX7JU6MZNZ86" target="_blank" rel="noopener">Donate</a>
-        <a class="btn" href="mailto:team@monroeftc.org">Contact</a>
-      </nav>
-    </div>
-  </header>
-<section style="background:#0e1638; padding:30px 10%; text-align:center; border-top:1px solid #1e2a5c; border-bottom:1px solid #1e2a5c;">
-  <p style="font-size:18px; color:#cfd8ff; margin:0;">
-    Cyber Titans competes in the 
-    <a href="https://www.firstinspires.org/robotics/ftc" target="_blank" rel="noopener" style="color:#00eaff; font-weight:600;">
-      FIRST Tech Challenge
-    </a>
-    program by 
-    <a href="https://www.firstinspires.org" target="_blank" rel="noopener" style="color:#00eaff; font-weight:600;">
-      FIRST (For Inspiration and Recognition of Science and Technology)
-    </a>.
-  </p>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <span class="nav-wordmark">Monroe FTC Robotics</span>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#team">What We Do</a>
+    <a href="#goals">Team</a>
+    <a href="#join">Contact</a>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Monroe FTC Robotics · Monroe Township, NJ</p>
+    <h1 class="hero-title">
+      <span class="line1">ANTI</span>
+      <span class="line2">GRAVITY</span>
+    </h1>
+    <p class="hero-sub">
+      A Monroe-based FTC robotics team for students who want to build serious robots, write real code, solve hard problems, use AI, and compete with confidence.
+    </p>
+  </div>
+  <div class="hero-right">
+    <img src="TeamLogo.png" style="width:70%;max-width:450px;aspect-ratio:3/3;object-fit:cover;transform:translateX(-40%);">
+  </div>
 </section>
 
-  <main id="top">
-    <section class="hero">
-      <div class="wrap hero-inner">
-        <div>
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            FIRST Tech Challenge Team
-          </div>
+<!-- RULE ROW -->
+<div class="rule-row">
+  <span class="rule-item">Monroe Township, NJ</span>
+  <span class="rule-item">Grades 7–11</span>
+  <span class="rule-item">FTC Robotics</span>
+  <span class="rule-item">Neighboring Towns Welcome</span>
+  <span class="rule-item">Build · Code · Compete</span>
+</div>
 
-          <h1><span class="gradient">Cyber Titans</span></h1>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat anim-up">
+    <span class="stat-num">7–11</span>
+    <span class="stat-label">Preferred Grades</span>
+  </div>
+  <div class="stat anim-up d1">
+    <span class="stat-num">3</span>
+    <span class="stat-label">Core Disciplines</span>
+  </div>
+  <div class="stat anim-up d2">
+    <span class="stat-num">12</span>
+    <span class="stat-label">Team Members</span>
+  </div>
+</div>
 
-          <p>
-            A Monroe-based FTC robotics team for students who want to build serious robots, write real code,
-            solve hard problems, use AI and compete with confidence.
-          </p>
+<!-- ══════════════ ABOUT ══════════════ -->
+<section class="section" id="about">
+  <div class="anim-left">
+    <div class="section-label">01 — About</div>
+    <h2 class="section-title">WHO WE ARE</h2>
+  </div>
+  <div class="pillars">
+    <div class="pillar anim-pop">
+      <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
+        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#2a2a2a"/>
+        <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#111"/>
+        <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#3d3d3d"/>
+        <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#555" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <p class="pillar-num">001</p>
+      <h3 class="pillar-title">Monroe-Based, Not Monroe-Only</h3>
+      <p class="pillar-body">We welcome motivated students from neighboring towns and surrounding communities who are serious about robotics.</p>
+    </div>
+    <div class="pillar anim-pop d1">
+      <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
+        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#252525"/>
+        <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#0f0f0f"/>
+        <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#383838"/>
+        <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#4e4e4e" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <p class="pillar-num">002</p>
+      <h3 class="pillar-title">First Tech Challenge Team</h3>
+      <p class="pillar-body">FTC combines engineering, software, strategy, teamwork, outreach, and competition. Students do real technical work: mechanical design, Java programming, and match-strategy.</p>
+    </div>
+    <div class="pillar anim-pop d2">
+      <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
+        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#1a1a1a"/>
+        <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#0a0a0a"/>
+        <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#2d2d2d"/>
+        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <p class="pillar-num">003</p>
+      <h3 class="pillar-title">Guided By</h3>
+      <p class="pillar-body">Coach with over a decade of robotics experience, including multiple championship-level teams and recent FTC judging role.</p>
+    </div>
+  </div>
+</section>
 
-          <p style="margin-top:14px;">
-            While the team is based in <strong>Monroe Township, New Jersey</strong>, we also welcome motivated students
-            from <strong>neighboring towns and surrounding communities</strong>.
-          </p>
+<!-- ══════════════ WHAT STUDENTS DO ══════════════ -->
+<section class="section" id="team">
+  <div class="anim-right">
+    <div class="section-label">02 — What We Do</div>
+    <h2 class="section-title">ENGINEER | CODE | COMPETE</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card anim-up">
+      <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
+        <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
+        <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
+        <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
+        <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <p class="tc-division">M — Mechanical Design</p>
+      <h3 class="tc-name">Engineering</h3>
+      <p class="tc-desc">Build robot mechanisms, work with motors, gears, structure, electrical, motion, intake systems, lifts, drivetrains, and precision assembly.</p>
+      <div class="tc-tags">
+        <span class="tc-tag">Mechanisms</span>
+        <span class="tc-tag">CAD</span>
+        <span class="tc-tag">Accuracy</span>
+        <span class="tc-tag">Chassis</span>
+      </div>
+    </div>
+    <div class="team-card anim-up d1">
+      <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
+        <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
+        <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
+        <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
+        <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <p class="tc-division">C — Coding & Control</p>
+      <h3 class="tc-name">Programming</h3>
+      <p class="tc-desc">Program autonomous and driver-controlled behavior, integrate sensors, tune performance, and learn how software directly affects match results.</p>
+      <div class="tc-tags">
+        <span class="tc-tag">Java</span>
+        <span class="tc-tag">Autonomous</span>
+        <span class="tc-tag">Sensors</span>
+        <span class="tc-tag">AI / CV</span>
+      </div>
+    </div>
+    <div class="team-card anim-up d2">
+      <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
+        <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
+        <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
+        <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
+        <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <p class="tc-division">S — Strategy & Competition</p>
+      <h3 class="tc-name">Strategy</h3>
+      <p class="tc-desc">Study the game, prioritize, evaluate tradeoffs, test ideas, and develop a robot built to score, survive, and win.</p>
+      <div class="tc-tags">
+        <span class="tc-tag">Game Analysis</span>
+        <span class="tc-tag">Collaboration</span>
+        <span class="tc-tag">Drive Practice</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <div class="hero-actions">
-            <a class="btn primary" href="#join">Join the Team</a>
-            <a class="btn" href="#about">Learn More</a>
-          </div>
+<!-- ══════════════ WHO WE'RE LOOKING FOR ══════════════ -->
+<section class="section" id="goals">
+  <div class="anim-left">
+    <div class="section-label">03 — Team</div>
+    <h2 class="section-title">WHO WE'RE LOOKING FOR</h2>
+  </div>
+  <div class="project-list">
 
-          <div class="hero-note">
-            For students in <strong>grades 7–11</strong> interested in robotics, programming, engineering, design, strategy, and teamwork.
-          </div>
+    <div class="proj-row anim-up">
+      <svg class="proj-hexmark" width="20" height="22" viewBox="0 0 20 22" fill="none" opacity="0.9">
+        <polygon points="10,0 20,5.5 20,16.5 10,22 0,16.5 0,5.5" fill="#1c1c1c"/>
+        <polygon points="0,5.5 10,11 10,22 0,16.5" fill="#0a0a0a"/>
+        <polygon points="10,11 20,5.5 20,16.5 10,22" fill="#303030"/>
+      </svg>
+      <span class="proj-name">Students in Grades 7 through 11</span>
+    </div>
+
+    <!-- Grade breakdown sub-area -->
+    <div class="grade-breakdown anim-up d1">
+      <div class="grade-breakdown-label">Roster spots · 2026–2027 school year</div>
+      <div class="grade-chips">
+        <div class="grade-chip">
+          <span class="gc-grade">7th Grade</span>
+          <span class="gc-spots">3 spots</span>
         </div>
-
-        <div class="hero-art" aria-hidden="true">
-          <div class="chip c1">FTC Robotics<small>Build • Code • Compete</small></div>
-          <div class="chip c2">Monroe Based<small>Nearby towns welcome</small></div>
-          <div class="chip c3">Grades 7–11<small>Serious students wanted</small></div>
-          <div class="chip c4">Cyber Titans<small>Future-facing team</small></div>
-
-          <div class="robot">
-            <svg viewBox="0 0 520 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Futuristic robot graphic">
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#58F0FF"/>
-                  <stop offset="55%" stop-color="#7D9BFF"/>
-                  <stop offset="100%" stop-color="#B276FF"/>
-                </linearGradient>
-                <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="rgba(255,255,255,0.95)"/>
-                  <stop offset="100%" stop-color="rgba(150,210,255,0.18)"/>
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="4" result="b"/>
-                  <feMerge>
-                    <feMergeNode in="b"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <!-- hex frame -->
-              <polygon points="260,20 415,105 415,280 260,365 105,280 105,105"
-                       fill="none" stroke="url(#g1)" stroke-width="3" opacity="0.65"/>
-
-              <!-- shoulder arcs -->
-              <path d="M120 242 C155 190, 205 165, 260 165 C315 165, 365 190, 400 242"
-                    fill="none" stroke="url(#g1)" stroke-width="4" opacity="0.7"/>
-              <path d="M88 274 C140 205, 198 176, 260 176 C322 176, 380 205, 432 274"
-                    fill="none" stroke="url(#g1)" stroke-width="2" opacity="0.45"/>
-
-              <!-- head -->
-              <rect x="180" y="92" width="160" height="116" rx="28"
-                    fill="rgba(9,15,38,0.84)" stroke="url(#g1)" stroke-width="3"/>
-              <rect x="196" y="106" width="128" height="88" rx="20"
-                    fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-              <circle cx="225" cy="145" r="18" fill="none" stroke="#58F0FF" stroke-width="4" filter="url(#glow)"/>
-              <circle cx="295" cy="145" r="18" fill="none" stroke="#58F0FF" stroke-width="4" filter="url(#glow)"/>
-              <path d="M214 179 H306" stroke="#8BEFFF" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
-              <path d="M260 92 V66" stroke="url(#g1)" stroke-width="3"/>
-              <circle cx="260" cy="58" r="10" fill="#58F0FF" filter="url(#glow)"/>
-
-              <!-- neck -->
-              <path d="M226 208 V236 M260 208 V244 M294 208 V236"
-                    stroke="url(#g1)" stroke-width="4" stroke-linecap="round"/>
-
-              <!-- torso -->
-              <path d="M170 252 L350 252 L386 410 L134 410 Z"
-                    fill="rgba(8,13,33,0.84)" stroke="url(#g1)" stroke-width="3"/>
-              <path d="M210 282 H310 M194 320 H326 M182 360 H338"
-                    stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
-              <circle cx="260" cy="327" r="40" fill="none" stroke="#58F0FF" stroke-width="4" filter="url(#glow)"/>
-              <circle cx="260" cy="327" r="11" fill="#58F0FF" filter="url(#glow)"/>
-              <path d="M220 410 V470 M300 410 V470" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
-              <path d="M196 470 H324" stroke="url(#g1)" stroke-width="4"/>
-
-              <!-- left arm -->
-              <path d="M170 270 L110 320 L96 408" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
-              <path d="M98 410 L128 474 L112 546" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
-              <circle cx="110" cy="320" r="10" fill="#58F0FF" filter="url(#glow)"/>
-              <circle cx="96" cy="408" r="10" fill="#58F0FF" filter="url(#glow)"/>
-
-              <!-- right arm -->
-              <path d="M350 270 L410 320 L424 408" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
-              <path d="M422 410 L392 474 L408 546" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
-              <circle cx="410" cy="320" r="10" fill="#58F0FF" filter="url(#glow)"/>
-              <circle cx="424" cy="408" r="10" fill="#58F0FF" filter="url(#glow)"/>
-
-              <!-- left leg -->
-              <path d="M214 470 L182 560" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M182 560 L158 596" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M150 598 H198" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-
-              <!-- right leg -->
-              <path d="M306 470 L338 560" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M338 560 L362 596" fill="none" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M322 598 H370" stroke="url(#g1)" stroke-width="6" stroke-linecap="round"/>
-
-              <!-- circuit accents -->
-              <path d="M72 100 H128 M392 100 H448 M52 224 H116 M404 224 H468 M60 510 H126 M394 510 H460"
-                    stroke="rgba(88,240,255,0.55)" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="72" cy="100" r="5" fill="#58F0FF"/>
-              <circle cx="448" cy="100" r="5" fill="#58F0FF"/>
-              <circle cx="52" cy="224" r="5" fill="#58F0FF"/>
-              <circle cx="468" cy="224" r="5" fill="#58F0FF"/>
-              <circle cx="60" cy="510" r="5" fill="#58F0FF"/>
-              <circle cx="460" cy="510" r="5" fill="#58F0FF"/>
-            </svg>
-          </div>
+        <div class="grade-chip">
+          <span class="gc-grade">8th Grade</span>
+          <span class="gc-spots">3 spots</span>
+        </div>
+        <div class="grade-chip">
+          <span class="gc-grade">9th Grade</span>
+          <span class="gc-spots">2 spots</span>
+        </div>
+        <div class="grade-chip">
+          <span class="gc-grade">10th Grade</span>
+          <span class="gc-spots">2 spots</span>
+        </div>
+        <div class="grade-chip">
+          <span class="gc-grade">11th Grade</span>
+          <span class="gc-spots">1 spot</span>
         </div>
       </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">About Cyber Titans</h2>
-            <p class="section-copy">
-              Cyber Titans is a competitive FIRST Tech Challenge team centered in Monroe Township.
-              Students learn by doing: designing robot systems, building mechanisms, writing code,
-              testing ideas, fixing failures, and improving until performance shows up on the field.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <article class="card">
-            <div class="card-icon">01</div>
-            <h3>Monroe-Based, Not Monroe-Only</h3>
-            <p>
-              The team is based in Monroe, but participation is not limited to Monroe students.
-              We welcome students from neighboring towns and nearby communities who are serious about robotics and want to contribute.
-            </p>
-            <ul class="feature-list">
-              <li>Based in Monroe Township, NJ</li>
-              <li>Open to nearby towns</li>
-              <li>Built for motivated students</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">02</div>
-            <h3>Why FTC</h3>
-            <p>
-              FTC combines engineering, software, strategy, teamwork, and competition.
-              Students do real technical work and see the direct result in how the robot performs under pressure.
-            </p>
-            <ul class="feature-list">
-              <li>Mechanical design and iteration</li>
-              <li>Java programming and sensors</li>
-              <li>Drive practice, match strategy, and problem solving</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="stats">
-          <div class="stat">
-            <strong>FTC</strong>
-            <span>FIRST Tech Challenge robotics competition</span>
-          </div>
-          <div class="stat">
-            <strong>7–11</strong>
-            <span>Grades currently targeted for team participation</span>
-          </div>
-          <div class="stat">
-            <strong>STEM</strong>
-            <span>Engineering, coding, design, and real-world teamwork</span>
-          </div>
-          <div class="stat">
-            <strong>Monroe+</strong>
-            <span>Monroe based, with neighboring towns welcome</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">What Students Do</h2>
-            <p class="section-copy">
-              This is not a passive club. Students build, test, analyze, improve, and compete.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <article class="card">
-            <div class="card-icon">M</div>
-            <h3>Mechanical Design</h3>
-            <p>
-              Build robot mechanisms, work with motors, gears, structure, motion, intake systems,
-              lifts, drivetrains, and precision assembly.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">C</div>
-            <h3>Coding & Control</h3>
-            <p>
-              Program autonomous and driver-controlled behavior, integrate sensors, tune performance,
-              and learn how software directly affects match results.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">S</div>
-            <h3>Strategy & Competition</h3>
-            <p>
-              Study the game, choose priorities, evaluate tradeoffs, test ideas, and develop a robot
-              that is built to score, survive, and win.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="join" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Join the Team</h2>
-            <p class="section-copy">
-              We are looking for students who are curious, disciplined, and ready to work on something challenging.
-              Interest in robotics helps, but commitment matters more than prior experience.
-            </p>
-          </div>
-        </div>
-
-        <div class="join-panel">
-          <article class="card">
-            <div class="card-icon">+</div>
-            <h3>Who We’re Looking For</h3>
-            <ul class="feature-list">
-              <li>Students in grades 7 through 11</li>
-              <li>Interest in robotics, programming, engineering, design, or strategy</li>
-              <li>Students based in Monroe or nearby towns</li>
-              <li>Willingness to learn, build, test, and improve</li>
-            </ul>
-            <div style="margin-top:20px;">
-              <a class="btn primary" href="mailto:team@monroeftc.org?subject=Cyber%20Titans%20Interest">Contact the Team</a>
-            </div>
-          </article>
-
-          <article class="card contact-box">
-            <div class="contact-row">
-              <div>
-                <b>Location</b>
-                <div>Monroe Township, New Jersey</div>
-              </div>
-            </div>
-
-            <div class="contact-row">
-              <div>
-                <b>Geography</b>
-                <div>Monroe-based, with students from neighboring towns and surrounding communities welcome</div>
-              </div>
-            </div>
-
-            <div class="contact-row">
-              <div>
-                <b>Email</b>
-                <div><a class="muted-link" href="mailto:team@monroeftc.org">team@monroeftc.org</a></div>
-              </div>
-            </div>
-
-            <div class="contact-row">
-              <div>
-                <b>Current Team Name</b>
-                <div>Cyber Titans is the working team name for now and may evolve as the team forms.</div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="wrap">
-        <strong>Cyber Titans</strong><br>
-        Monroe FTC Robotics • Monroe Township, New Jersey • Students from neighboring towns welcome
-      </div>
-      <p style="font-size:12px; color:#888; margin-top:10px;">
-        Service project of Agraj Seva Kendra, a 501(c)(3) nonprofit organization.
+      <p class="grade-note">
+        11 total roster spots. Grades are based on the student's enrollment during the
+        <strong>2026–2027 school year.</strong>
       </p>
-    </footer>
-  </main>
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9ff25faecb394f77a986b7449dc3ab2b"}'></script><!-- End Cloudflare Web Analytics -->
+    </div>
+
+    <div class="proj-row anim-up d2">
+      <svg class="proj-hexmark" width="20" height="22" viewBox="0 0 20 22" fill="none" opacity="0.75">
+        <polygon points="10,0 20,5.5 20,16.5 10,22 0,16.5 0,5.5" fill="none" stroke="#0c0c0c" stroke-width="1.2"/>
+        <polygon points="0,5.5 10,11 10,22 0,16.5" fill="#0c0c0c" opacity="0.04"/>
+        <polygon points="10,11 20,5.5 20,16.5 10,22" fill="#0c0c0c" opacity="0.07"/>
+      </svg>
+      <span class="proj-name">Interest in Robotics, Programming, AI, Engineering and Strategy</span>
+    </div>
+
+    <div class="proj-row anim-up d3">
+      <svg class="proj-hexmark" width="20" height="22" viewBox="0 0 20 22" fill="none" opacity="0.6">
+        <polygon points="10,0 20,5.5 20,16.5 10,22 0,16.5 0,5.5" fill="#1c1c1c"/>
+        <polygon points="0,5.5 10,11 10,22 0,16.5" fill="#0a0a0a"/>
+        <polygon points="10,11 20,5.5 20,16.5 10,22" fill="#303030"/>
+      </svg>
+      <span class="proj-name">From Monroe or a Nearby Town</span>
+    </div>
+
+    <div class="proj-row anim-up d4">
+      <svg class="proj-hexmark" width="20" height="22" viewBox="0 0 20 22" fill="none" opacity="0.45">
+        <polygon points="10,0 20,5.5 20,16.5 10,22 0,16.5 0,5.5" fill="none" stroke="#0c0c0c" stroke-width="1.2"/>
+      </svg>
+      <span class="proj-name">Willingness to Learn and Contribute</span>
+    </div>
+
+    <div class="proj-row anim-up d5">
+      <svg class="proj-hexmark" width="20" height="22" viewBox="0 0 20 22" fill="none" opacity="0.28">
+        <polygon points="10,0 20,5.5 20,16.5 10,22 0,16.5 0,5.5" fill="#1c1c1c"/>
+        <polygon points="0,5.5 10,11 10,22 0,16.5" fill="#0a0a0a"/>
+        <polygon points="10,11 20,5.5 20,16.5 10,22" fill="#303030"/>
+      </svg>
+      <span class="proj-name">Commitment → Matters More Than Prior Experience</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section class="section" id="join" style="background:var(--black);color:var(--white);border-bottom:none;">
+  <div class="anim-right">
+    <div class="section-label">04 — Contact</div>
+    <h2 class="section-title">REACH US</h2>
+  </div>
+  <div class="contact-grid anim-up d1">
+    <div>
+      <div class="contact-email-header">Email: </div>
+      <a href="mailto:team@monroeftc.org" class="contact-email-link">team@monroeftc.org</a>
+      <p class="contact-note" style="margin-top:20px;">Please include parent name, parent phone number, child's name, and child's 2026-27 grade (7, 8, 9, 10, or 11)</p>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:16px;align-items:baseline;">
+          <span style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);width:96px;flex-shrink:0;">Location</span>
+          <span style="font-size:1.05rem;color:rgba(255,255,255,0.85);font-weight:300;">Monroe Township, New Jersey</span>
+        </div>
+        <div style="display:flex;gap:16px;align-items:baseline;">
+          <span style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);width:96px;flex-shrink:0;">Geography</span>
+          <span style="font-size:1.05rem;color:rgba(255,255,255,0.85);font-weight:300;">Monroe-based · neighboring towns welcome</span>
+        </div>
+        <div style="display:flex;gap:16px;align-items:baseline;">
+          <span style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);width:96px;flex-shrink:0;">Grades</span>
+          <span style="font-size:1.05rem;color:rgba(255,255,255,0.85);font-weight:300;">7 through 11</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Antigravity · <strong style="font-weight:400;">Monroe FTC Robotics</strong> · Monroe Township, NJ · Neighboring towns welcome</span>
+  <span>Service project of Agraj Seva Kendra, a 501(c)(3) nonprofit</span>
+</footer>
+
+<script>
+const animEls = document.querySelectorAll('.anim-left,.anim-right,.anim-up,.anim-pop');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+animEls.forEach(el => io.observe(el));
+
+(function () {
+  const canvas = document.getElementById('hex-canvas');
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  let scrollY = 0;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+  const FACE_TOP   = (a) => `rgba(18,18,18,${a})`;
+  const FACE_LEFT  = (a) => `rgba(6,6,6,${a})`;
+  const FACE_RIGHT = (a) => `rgba(32,32,32,${a})`;
+  const STROKE     = (a) => `rgba(0,0,0,${a})`;
+  function drawHexPrism(cx, cy, r, depth, alpha, angle) {
+    const verts = [];
+    for (let i = 0; i < 6; i++) {
+      const a = (Math.PI / 3) * i + angle;
+      verts.push({ x: cx + r * Math.sin(a), y: cy - r * Math.cos(a) });
+    }
+    const bverts = verts.map(v => ({ x: v.x, y: v.y + depth }));
+    const leftSegs = [3,4,5], rightSegs = [0,1,2];
+    for (const i of rightSegs) {
+      const j=(i+1)%6;
+      ctx.beginPath();ctx.moveTo(verts[i].x,verts[i].y);ctx.lineTo(verts[j].x,verts[j].y);
+      ctx.lineTo(bverts[j].x,bverts[j].y);ctx.lineTo(bverts[i].x,bverts[i].y);ctx.closePath();
+      ctx.fillStyle=FACE_RIGHT(alpha*0.85);ctx.fill();ctx.strokeStyle=STROKE(alpha*0.35);ctx.lineWidth=0.5;ctx.stroke();
+    }
+    for (const i of leftSegs) {
+      const j=(i+1)%6;
+      ctx.beginPath();ctx.moveTo(verts[i].x,verts[i].y);ctx.lineTo(verts[j].x,verts[j].y);
+      ctx.lineTo(bverts[j].x,bverts[j].y);ctx.lineTo(bverts[i].x,bverts[i].y);ctx.closePath();
+      ctx.fillStyle=FACE_LEFT(alpha*0.75);ctx.fill();ctx.strokeStyle=STROKE(alpha*0.35);ctx.lineWidth=0.5;ctx.stroke();
+    }
+    ctx.beginPath();ctx.moveTo(verts[0].x,verts[0].y);
+    for(let i=1;i<6;i++)ctx.lineTo(verts[i].x,verts[i].y);ctx.closePath();
+    ctx.fillStyle=FACE_TOP(alpha*0.92);ctx.fill();ctx.strokeStyle=STROKE(alpha*0.4);ctx.lineWidth=0.6;ctx.stroke();
+  }
+  const HEXES=[
+    {sx:0.03,sy:0.12,r:28,depth:10,speed:0.018,rotSpeed:0.0004,phase:0.0},
+    {sx:0.06,sy:0.32,r:18,depth:7,speed:0.012,rotSpeed:0.0003,phase:1.4},
+    {sx:0.02,sy:0.52,r:34,depth:12,speed:0.022,rotSpeed:0.0005,phase:2.8},
+    {sx:0.07,sy:0.70,r:22,depth:8,speed:0.016,rotSpeed:0.0004,phase:0.7},
+    {sx:0.04,sy:0.88,r:26,depth:10,speed:0.020,rotSpeed:0.0003,phase:3.5},
+    {sx:0.09,sy:1.10,r:16,depth:6,speed:0.014,rotSpeed:0.0006,phase:1.1},
+    {sx:0.01,sy:1.35,r:30,depth:11,speed:0.019,rotSpeed:0.0004,phase:4.2},
+    {sx:0.06,sy:1.60,r:20,depth:7,speed:0.013,rotSpeed:0.0003,phase:2.0},
+    {sx:0.03,sy:1.82,r:24,depth:9,speed:0.017,rotSpeed:0.0005,phase:5.1},
+    {sx:0.08,sy:2.05,r:32,depth:12,speed:0.021,rotSpeed:0.0004,phase:0.3},
+    {sx:0.05,sy:2.28,r:18,depth:7,speed:0.015,rotSpeed:0.0003,phase:3.8},
+    {sx:0.02,sy:2.50,r:28,depth:10,speed:0.018,rotSpeed:0.0006,phase:1.7},
+    {sx:0.97,sy:0.08,r:24,depth:9,speed:0.016,rotSpeed:0.0004,phase:2.2},
+    {sx:0.94,sy:0.28,r:32,depth:12,speed:0.022,rotSpeed:0.0005,phase:0.5},
+    {sx:0.98,sy:0.48,r:18,depth:7,speed:0.013,rotSpeed:0.0003,phase:3.3},
+    {sx:0.92,sy:0.65,r:28,depth:10,speed:0.020,rotSpeed:0.0004,phase:1.9},
+    {sx:0.96,sy:0.85,r:22,depth:8,speed:0.015,rotSpeed:0.0003,phase:4.7},
+    {sx:0.93,sy:1.05,r:34,depth:13,speed:0.023,rotSpeed:0.0005,phase:0.8},
+    {sx:0.97,sy:1.28,r:20,depth:7,speed:0.014,rotSpeed:0.0004,phase:2.6},
+    {sx:0.91,sy:1.50,r:26,depth:10,speed:0.018,rotSpeed:0.0003,phase:5.4},
+    {sx:0.95,sy:1.75,r:30,depth:11,speed:0.021,rotSpeed:0.0006,phase:1.3},
+    {sx:0.98,sy:1.98,r:16,depth:6,speed:0.012,rotSpeed:0.0004,phase:3.0},
+    {sx:0.93,sy:2.22,r:28,depth:10,speed:0.019,rotSpeed:0.0005,phase:0.6},
+    {sx:0.96,sy:2.46,r:22,depth:8,speed:0.016,rotSpeed:0.0003,phase:4.1},
+  ];
+  const state=HEXES.map(h=>({...h,angle:h.phase,floatT:h.phase*100}));
+  function draw(){
+    const W=canvas.width,H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+    const docH=document.documentElement.scrollHeight;
+    for(const s of state){
+      const pageY=s.sy*docH;
+      const vy=pageY-scrollY*(1-s.speed*8);
+      if(vy<-80||vy>H+80){s.floatT+=0.8;s.angle+=s.rotSpeed;continue;}
+      const floatY=Math.sin(s.floatT*0.012)*10;
+      s.floatT+=0.8;s.angle+=s.rotSpeed;
+      const cx=s.sx*W,cy=vy+floatY;
+      const edgeDist=Math.min(vy,H-vy);
+      const fadeAlpha=Math.min(1,Math.max(0,edgeDist/120));
+      const baseAlpha=(0.22+(1-s.r/40)*0.10)*fadeAlpha;
+      drawHexPrism(cx,cy,s.r,s.depth,baseAlpha,s.angle);
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
 </body>
 </html>
