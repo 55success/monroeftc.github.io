@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Antigravity Robotics</title>
+<title>Monroe FTC Robotics</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
 <link rel="icon" type="image/x-icon" href="WebIcon.png">
 <style>
@@ -30,7 +30,7 @@ nav{
   border-bottom:1px solid var(--rule);
 }
 .nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--black);}
-.nav-wordmark{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:5px;}
+.nav-wordmark{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:5px;}
 .nav-logo-sub{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:2px;opacity:0.55;text-transform:uppercase;padding-left:2px;}
 .nav-links{display:flex;gap:40px;}
 .nav-links a{
@@ -59,22 +59,28 @@ nav{
 }
 .hero-title{
   font-family:'Bebas Neue',sans-serif;
-  /* font-size:clamp(72px,10vw,140px); */
   line-height:0.9;letter-spacing:2px;margin-top:24px;
 }
 .hero-title .line1{
+  font-family:'Bebas Neue',sans-serif;
+  /* font-size:clamp(72px,10vw,140px); */
+  line-height:0.9;letter-spacing:2px;margin-top:24px;
   display:block;animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;
   font-size:clamp(72px,10vw,140px);
 }
 .hero-title .line2{
+  font-family:'Bebas Neue',sans-serif;
+  /* font-size:clamp(72px,10vw,140px); */
+  line-height:0.9;letter-spacing:2px;margin-top:24px;
   display:block;-webkit-text-stroke:2.5px var(--black);color:transparent;
   animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.38s both;
   font-size:clamp(72px,10vw,140px);
 }
 .hero-title .line0{
-  font-size: 6rem;
-  display:block;-webkit-text-stroke:2.5px var(--black);color:transparent;
-  animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.38s both;
+  display:block;animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;
+  font-size:clamp(72px,10vw,140px);
+  font-size: 1.3rem;
+  margin-bottom: 24px;
 }
 .hero-sub{
   margin-top:28px;font-size:1.2rem;line-height:1.85;font-weight:600;
@@ -279,14 +285,14 @@ nav{
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:52px;align-items:end;}
 .contact-email-link{
   font-family:'Bebas Neue',sans-serif;
-  font-size:2.5rem;letter-spacing:2px;
+  font-size:1.75rem;letter-spacing:2px;
   color:var(--white);text-decoration:none;display:inline-block;
   border-bottom:1px solid rgba(255,255,255,0.35);
   padding-bottom:6px;transition:border-color 0.3s;
 }
 .contact-email-header{
   font-family:'Bebas Neue',sans-serif;
-  font-size:2.5rem;letter-spacing:2px;
+  font-size:1.75rem;letter-spacing:2px;
   color:var(--white);text-decoration:none;display:inline-block;
   border-bottom:0px solid rgba(255,255,255,0.35);
   padding-bottom:6px;transition:border-color 0.3s;
@@ -314,6 +320,10 @@ footer{
   display:flex;justify-content:space-between;align-items:center;
 }
 footer span{
+  font-family:'Space Mono',monospace;font-size:0.62rem;
+  letter-spacing:2px;color:rgba(255,255,255,0.55);
+}
+footer a{
   font-family:'Space Mono',monospace;font-size:0.62rem;
   letter-spacing:2px;color:rgba(255,255,255,0.55);
 }
@@ -370,14 +380,14 @@ footer span{
 <!-- ══════════════ HERO ══════════════ -->
 <section id="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">Monroe FTC Robotics · Monroe Township, NJ</p>
+    <!-- <p class="hero-eyebrow">Monroe FTC Robotics · Monroe Township, NJ</p> -->
     <h1 class="hero-title">
-      <span class="line0">TEAM</span>
+      <div class="section-label">00 — Team Name</div>
       <span class="line1">ANTI</span>
       <span class="line2">GRAVITY</span>
     </h1>
     <p class="hero-sub">
-      A Monroe-based FTC robotics team for students who want to build serious robots, write real code, solve hard problems, use AI, and compete with confidence.
+      A Monroe Township based FTC robotics team for students who want to build serious robots, write real code, solve hard problems, use AI, and compete with confidence.
     </p>
   </div>
   <div class="hero-right">
@@ -418,35 +428,35 @@ footer span{
   </div>
   <div class="pillars">
     <div class="pillar anim-pop">
-      <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
+      <!-- <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
         <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#2a2a2a"/>
         <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#111"/>
         <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#3d3d3d"/>
         <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#555" stroke-width="0.8" opacity="0.5"/>
-      </svg>
+      </svg> -->
       <p class="pillar-num">001</p>
       <h3 class="pillar-title">Monroe-Based, Not Monroe-Only</h3>
       <p class="pillar-body">We welcome motivated students from neighboring towns and surrounding communities who are serious about robotics.</p>
     </div>
     <div class="pillar anim-pop d1">
-      <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
+      <!-- <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
         <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#252525"/>
         <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#0f0f0f"/>
         <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#383838"/>
         <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#4e4e4e" stroke-width="0.8" opacity="0.5"/>
-      </svg>
+      </svg> -->
       <p class="pillar-num">002</p>
       <h3 class="pillar-title">First Tech Challenge Team</h3>
       <p class="pillar-body">FTC combines engineering, software, strategy, teamwork, outreach, and competition. Students do real technical work: mechanical design, Java programming, and match-strategy.</p>
     </div>
     <div class="pillar anim-pop d2">
-      <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
+      <!-- <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
         <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#1a1a1a"/>
         <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#0a0a0a"/>
         <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#2d2d2d"/>
         <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
         <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg>
+      </svg> -->
       <p class="pillar-num">003</p>
       <h3 class="pillar-title">Guided By</h3>
       <p class="pillar-body">Coach with over a decade of robotics experience, including multiple championship-level teams and recent FTC judging role.</p>
@@ -462,13 +472,13 @@ footer span{
   </div>
   <div class="team-grid">
     <div class="team-card anim-up">
-      <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
+      <!-- <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
         <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
         <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
         <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
         <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg>
-      <p class="tc-division">M — Mechanical Design</p>
+      </svg> -->
+      <p class="tc-division">Mechanical Design</p>
       <h3 class="tc-name">Engineering</h3>
       <p class="tc-desc">Build robot mechanisms, work with motors, gears, structure, electrical, motion, intake systems, lifts, drivetrains, and precision assembly.</p>
       <div class="tc-tags">
@@ -479,13 +489,13 @@ footer span{
       </div>
     </div>
     <div class="team-card anim-up d1">
-      <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
+      <!-- <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
         <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
         <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
         <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
         <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg>
-      <p class="tc-division">C — Coding & Control</p>
+      </svg> -->
+      <p class="tc-division">Coding & Control</p>
       <h3 class="tc-name">Programming</h3>
       <p class="tc-desc">Program autonomous and driver-controlled behavior, integrate sensors, tune performance, and learn how software directly affects match results.</p>
       <div class="tc-tags">
@@ -496,15 +506,15 @@ footer span{
       </div>
     </div>
     <div class="team-card anim-up d2">
-      <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
+      <!-- <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
         <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
         <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
         <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
         <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg>
-      <p class="tc-division">S — Strategy & Competition</p>
+      </svg> -->
+      <p class="tc-division">Strategy & Competition</p>
       <h3 class="tc-name">Strategy</h3>
-      <p class="tc-desc">Study the game, prioritize, evaluate tradeoffs, test ideas, and develop a robot built to score, survive, and win.</p>
+      <p class="tc-desc">Study the game, prioritize, evaluate tradeoffs, test ideas, and develop a robot built to score, survive, and win. Design is a key part of this process.</p>
       <div class="tc-tags">
         <span class="tc-tag">Game Analysis</span>
         <span class="tc-tag">Collaboration</span>
@@ -608,7 +618,7 @@ footer span{
   <div class="contact-grid anim-up d1">
     <div>
       <div class="contact-email-header">Email: </div>
-      <a href="mailto:team@monroeftc.org" class="contact-email-link">team@monroeftc.org</a>
+      <a href="mailto:info@monroeftc.org" class="contact-email-link">info@monroeftc.org</a>
       <p class="contact-note" style="margin-top:20px;">Please include parent name, parent phone number, child's name, and child's 2026-27 grade (7, 8, 9, 10, or 11)</p>
       <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
         <div style="display:flex;gap:16px;align-items:baseline;">
@@ -629,8 +639,8 @@ footer span{
 </section>
 
 <footer>
-  <span>Antigravity · <strong style="font-weight:400;">Monroe FTC Robotics</strong> · Monroe Township, NJ · Neighboring towns welcome</span>
-  <span>Service project of Agraj Seva Kendra, a 501(c)(3) nonprofit</span>
+  <span>Antigravity · <strong style="font-weight:400;">Monroe FTC Robotics</strong> · Monroe Township, NJ</span>
+  <a href="https://agraj.org" target="_blank" rel="noopener noreferrer">Service project of Agraj Seva Kendra, a 501(c)(3) nonprofit</a>
 </footer>
 
 <script>
