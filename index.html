@@ -63,14 +63,12 @@ nav{
 }
 .hero-title .line1{
   font-family:'Bebas Neue',sans-serif;
-  /* font-size:clamp(72px,10vw,140px); */
   line-height:0.9;letter-spacing:2px;margin-top:24px;
   display:block;animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;
   font-size:clamp(72px,10vw,140px);
 }
 .hero-title .line2{
   font-family:'Bebas Neue',sans-serif;
-  /* font-size:clamp(72px,10vw,140px); */
   line-height:0.9;letter-spacing:2px;margin-top:24px;
   display:block;-webkit-text-stroke:2.5px var(--black);color:transparent;
   animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.38s both;
@@ -78,7 +76,6 @@ nav{
 }
 .hero-title .line0{
   display:block;animation:slideLeft 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s both;
-  font-size:clamp(72px,10vw,140px);
   font-size: 1.3rem;
   margin-bottom: 24px;
 }
@@ -181,7 +178,7 @@ nav{
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
 .team-card{
   border:1px solid var(--rule);padding:44px 32px;
-  background-color: var(--black);
+  background-color:var(--black);
   position:relative;overflow:hidden;
   transition:border-color 0.35s,transform 0.45s cubic-bezier(0.16,1,0.3,1);
 }
@@ -344,19 +341,156 @@ footer a{
 
 #hex-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
 
-@media(max-width:900px){
-  nav{padding:16px 22px;}
-  #hero{grid-template-columns:1fr;padding:110px 22px 60px;}
-  .hero-right{display:none;}
-  .section{padding:68px 22px;}
-  .pillars,.team-grid{grid-template-columns:1fr;}
-  .stats-bar{grid-template-columns:1fr 1fr;}
-  .contact-grid{grid-template-columns:1fr;gap:36px;}
-  .social-list{align-items:flex-start;}
-  footer{flex-direction:column;gap:6px;text-align:center;}
-  .grade-breakdown{padding-left:22px;}
-  .grade-chips{gap:8px;}
-  .contact-note{white-space:normal;}
+/* ═══════════════════════════════════════
+   MOBILE — ≤768px
+   Desktop layout untouched above.
+═══════════════════════════════════════ */
+@media(max-width:768px){
+
+  /* Base font scale down so rem units don't blow out */
+  body{ font-size:16px; }
+
+  /* ── NAV ── */
+  nav{
+    padding:14px 18px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .nav-wordmark{ font-size:1.4rem; letter-spacing:3px; }
+  .nav-links{
+    gap:18px;
+    /* wrap onto a second line on very small screens */
+    flex-wrap:wrap;
+  }
+  .nav-links a{ font-size:0.7rem; letter-spacing:2px; }
+
+  /* ── HERO ── */
+  #hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding:100px 18px 60px;
+    gap:28px;
+  }
+  .hero-right{ display:none; }
+  .hero-title .line0{ font-size:1rem; margin-bottom:12px; }
+  .hero-title .line1,
+  .hero-title .line2{
+    font-size:clamp(60px,18vw,110px);
+    margin-top:0;
+  }
+  .hero-sub{
+    font-size:1rem;
+    max-width:100%;
+    margin-top:18px;
+  }
+
+  /* ── RULE ROW ── */
+  /* Scroll horizontally — preserve all items, just let them scroll */
+  .rule-row{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .rule-row::-webkit-scrollbar{ display:none; }
+  .rule-item{ font-size:0.55rem; padding:14px 18px; }
+
+  /* ── STATS ── */
+  .stats-bar{ grid-template-columns:1fr 1fr 1fr; }
+  .stat{ padding:28px 10px; }
+  .stat-num{ font-size:clamp(2rem,8vw,3.5rem); }
+  .stat-label{ font-size:0.55rem; letter-spacing:2px; margin-top:6px; }
+
+  /* ── SECTIONS ── */
+  .section{ padding:52px 18px; }
+  .section-label{ font-size:0.58rem; margin-bottom:28px; }
+  .section-title{ font-size:clamp(34px,10vw,58px); margin-bottom:32px; }
+
+  /* ── PILLARS ── */
+  .pillars{ grid-template-columns:1fr; gap:16px; }
+  .pillar{
+    min-height:auto;
+    padding:32px 24px 28px;
+  }
+  .pillar-title{ font-size:1.6rem; }
+  .pillar-body{ font-size:1rem; }
+  .pillar-num{ font-size:0.55rem; }
+
+  /* ── TEAM CARDS ── */
+  .team-grid{ grid-template-columns:1fr; gap:16px; }
+  .team-card{ padding:28px 20px; }
+  .tc-name{ font-size:2rem; margin-bottom:12px; }
+  .tc-division{ font-size:0.58rem; margin-bottom:10px; }
+  .tc-desc{ font-size:1rem; }
+  .tc-tag{ font-size:0.7rem; padding:5px 10px; }
+
+  /* ── PROJECT / GOALS ROWS ── */
+  .proj-row{
+    gap:14px;
+    padding:20px 12px;
+  }
+  .proj-name{ font-size:1.15rem; line-height:1.25; }
+  /* Hexmark shrinks proportionally — keep it visible */
+  .proj-hexmark{ width:14px; height:16px; }
+
+  /* ── GRADE BREAKDOWN ── */
+  .grade-breakdown{ padding:18px 0 22px 18px; }
+  .grade-breakdown-label{ font-size:0.55rem; margin-bottom:12px; }
+  .grade-chips{ gap:8px; }
+  .grade-chip{ padding:12px 14px; }
+  .gc-grade{ font-size:1.1rem; }
+  .gc-spots{ font-size:0.6rem; }
+  .grade-note{ font-size:0.95rem; max-width:100%; }
+
+  /* ── CONTACT ── */
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:28px;
+    margin-top:32px;
+  }
+  .contact-email-header,
+  .contact-email-link{ font-size:1.3rem; }
+  .contact-note{
+    white-space:normal;   /* allow wrapping on mobile */
+    font-size:1rem;
+    margin-top:14px;
+  }
+
+  /* Inline contact detail rows */
+  #join .anim-up div[style]{
+    flex-direction:column !important;
+    gap:4px !important;
+  }
+  #join span[style*="width:96px"]{
+    width:auto !important;
+    font-size:0.55rem !important;
+  }
+  #join span[style*="font-size:1.05rem"]{
+    font-size:0.95rem !important;
+  }
+
+  /* ── FOOTER ── */
+  footer{
+    flex-direction:column;
+    gap:8px;
+    text-align:center;
+    padding:18px 18px;
+  }
+  footer span,
+  footer a{ font-size:0.52rem; }
+
+}
+
+/* Narrowest phones — extra squeeze */
+@media(max-width:380px){
+  .nav-links{ gap:12px; }
+  .nav-links a{ font-size:0.6rem; }
+  .hero-title .line1,
+  .hero-title .line2{ font-size:clamp(50px,20vw,90px); }
+  .hero-sub{ font-size:0.9rem; }
+  .section-title{ font-size:clamp(28px,11vw,48px); }
+  .proj-name{ font-size:1rem; }
+  .grade-chip{ padding:10px 10px; }
+  .gc-grade{ font-size:0.95rem; }
 }
 </style>
 </head>
@@ -380,7 +514,6 @@ footer a{
 <!-- ══════════════ HERO ══════════════ -->
 <section id="hero">
   <div class="hero-left">
-    <!-- <p class="hero-eyebrow">Monroe FTC Robotics · Monroe Township, NJ</p> -->
     <h1 class="hero-title">
       <div class="section-label">00 — Team Name</div>
       <span class="line1">ANTI</span>
@@ -428,35 +561,16 @@ footer a{
   </div>
   <div class="pillars">
     <div class="pillar anim-pop">
-      <!-- <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
-        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#2a2a2a"/>
-        <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#111"/>
-        <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#3d3d3d"/>
-        <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#555" stroke-width="0.8" opacity="0.5"/>
-      </svg> -->
       <p class="pillar-num">001</p>
       <h3 class="pillar-title">Monroe-Based, Not Monroe-Only</h3>
       <p class="pillar-body">We welcome motivated students from neighboring towns and surrounding communities who are serious about robotics.</p>
     </div>
     <div class="pillar anim-pop d1">
-      <!-- <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
-        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#252525"/>
-        <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#0f0f0f"/>
-        <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#383838"/>
-        <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#4e4e4e" stroke-width="0.8" opacity="0.5"/>
-      </svg> -->
       <p class="pillar-num">002</p>
       <h3 class="pillar-title">First Tech Challenge Team</h3>
       <p class="pillar-body">FTC combines engineering, software, strategy, teamwork, outreach, and competition. Students do real technical work: mechanical design, Java programming, and match-strategy.</p>
     </div>
     <div class="pillar anim-pop d2">
-      <!-- <svg class="pillar-hex-wrap" width="44" height="50" viewBox="0 0 44 50" fill="none">
-        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="#1a1a1a"/>
-        <polygon points="0,12.5 22,25 22,50 0,37.5" fill="#0a0a0a"/>
-        <polygon points="22,25 44,12.5 44,37.5 22,50" fill="#2d2d2d"/>
-        <polygon points="22,0 44,12.5 44,37.5 22,50 0,37.5 0,12.5" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="0" y1="12.5" x2="44" y2="12.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg> -->
       <p class="pillar-num">003</p>
       <h3 class="pillar-title">Guided By</h3>
       <p class="pillar-body">Coach with over a decade of robotics experience, including multiple championship-level teams and recent FTC judging role.</p>
@@ -472,12 +586,6 @@ footer a{
   </div>
   <div class="team-grid">
     <div class="team-card anim-up">
-      <!-- <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
-        <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
-        <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
-        <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
-        <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg> -->
       <p class="tc-division">Mechanical Design</p>
       <h3 class="tc-name">Engineering</h3>
       <p class="tc-desc">Build robot mechanisms, work with motors, gears, structure, electrical, motion, intake systems, lifts, drivetrains, and precision assembly.</p>
@@ -489,12 +597,6 @@ footer a{
       </div>
     </div>
     <div class="team-card anim-up d1">
-      <!-- <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
-        <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
-        <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
-        <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
-        <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg> -->
       <p class="tc-division">Coding & Control</p>
       <h3 class="tc-name">Programming</h3>
       <p class="tc-desc">Program autonomous and driver-controlled behavior, integrate sensors, tune performance, and learn how software directly affects match results.</p>
@@ -506,12 +608,6 @@ footer a{
       </div>
     </div>
     <div class="team-card anim-up d2">
-      <!-- <svg class="tc-hex" width="30" height="34" viewBox="0 0 30 34" fill="none">
-        <polygon points="15,0 30,8.5 30,25.5 15,34 0,25.5 0,8.5" fill="#1c1c1c"/>
-        <polygon points="0,8.5 15,17 15,34 0,25.5" fill="#0b0b0b"/>
-        <polygon points="15,17 30,8.5 30,25.5 15,34" fill="#303030"/>
-        <line x1="0" y1="8.5" x2="30" y2="8.5" stroke="#444" stroke-width="0.8" opacity="0.5"/>
-      </svg> -->
       <p class="tc-division">Strategy & Competition</p>
       <h3 class="tc-name">Strategy</h3>
       <p class="tc-desc">Study the game, prioritize, evaluate tradeoffs, test ideas, and develop a robot built to score, survive, and win. Design is a key part of this process.</p>
